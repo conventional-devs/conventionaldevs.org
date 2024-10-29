@@ -4,6 +4,8 @@ import starlight from "@astrojs/starlight";
 
 import tailwind from "@astrojs/tailwind";
 
+import markdoc from "@astrojs/markdoc";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://conventionaldevs.org",
@@ -14,17 +16,18 @@ export default defineConfig({
         github: "https://github.com/koroutine/conventionaldevs.org",
       },
       sidebar: [
-        // {
-        //   label: "Guides",
-        //   items: [
-        //     // Each item here is one entry in the navigation menu.
-        //     { label: "Example Guide", slug: "guides/example" },
-        //   ],
-        // },
-        // {
-        //   label: "Reference",
-        //   autogenerate: { directory: "reference" },
-        // },
+        {
+          label: "Introduction",
+          slug: "introduction",
+        },
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "reference" },
+        },
       ],
       customCss: [
         // Path to your Tailwind base styles:
@@ -35,5 +38,6 @@ export default defineConfig({
       // Disable the default base styles:
       applyBaseStyles: false,
     }),
+    markdoc(),
   ],
 });
