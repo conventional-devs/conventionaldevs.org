@@ -1,0 +1,96 @@
+---
+title: Time
+description: A standard approach to time in great software
+---
+
+Sadly, time comes in all shapes and sizes; and is a constant source of confusion and frustration in development.
+
+Let's start with the basics.
+
+## What is time?
+
+> Time is the ever-flowing continuum through which events unfold, a measure of change and existence.
+> Philosophically, it is both an abstract concept and a lived experience—marking the moments of now, shaping memory,
+> and anticipating the future. Time is the essence of impermanence, a reminder of life’s transient nature,
+> yet it is also a canvas upon which meaning, growth, and reality are constructed.
+>
+> -- <cite>ChatGPT, 2024</cite>
+
+As you may expect, nailing this down is a bit of a challenge. But it's made harder with a wide array of
+formats, uses, tools and language approaches.
+
+## Formats
+
+We have concluded that there are three main formats of time that a `Conventional Dev` should be using:
+
+### ISO time (ISO 8601 - RFC 3339)
+
+This is the most common format for time, and is used by many systems and tools. It is a string in the format `YYYY-MM-DDTHH:MM:SS.sssZ` where:
+
+- `YYYY` is the year
+- `MM` is the month
+- `DD` is the day
+- `HH` is the hour
+- `MM` is the minute
+- `SS` is the second
+- `sss` is the millisecond
+- `Z` is the timezone
+
+This is the one true format that software should be using if possible. It's clean, simple and easy to work with.
+
+Example:
+
+```js
+const now = new Date().toISOString();
+console.log(now); // 2023-08-01T00:00:00.000Z
+```
+
+[Reference](https://en.wikipedia.org/wiki/ISO_8601#RFCs)
+
+### Unix time (Unix timestamp)
+
+Unix time is a number of seconds since the Unix epoch (January 1, 1970). It is used by many systems and tools.
+
+You may also see this referred to as "epoch time" or "POSIX time"; and comes in `seconds`, `milliseconds` and `microseconds`.
+
+Example:
+
+{% tabs %}
+{% tabitem label="Javascript" %}
+```js
+const now = Date.now();
+console.log(now); // 1689753298000 - this is in milliseconds
+```
+{% /tabitem %}
+
+{% tabitem label="Go" %}
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	now := time.Now().Unix()
+	fmt.Println(now) // 1689753298 - this is in seconds
+}
+```
+{% /tabitem %}
+{% /tabs %}
+
+[Reference](https://en.wikipedia.org/wiki/Unix_time)
+
+### HTTP Header time (RFC 7231)
+
+Http time is a string in the format `Tue, 15 Nov 1994 08:12:31 GMT`. It is used by many systems and tools.
+
+Example:
+
+```js
+const now = new Date().toUTCString();
+console.log(now); // Tue, 15 Nov 1994 08:12:31 GMT
+```
+
+[Reference](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.1.1)
